@@ -5,7 +5,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.optim import Adam
 import matplotlib.pyplot as plt
-from sklearn.metrics import spearmanr
+from scipy.stats import spearmanr
 import random
 import os
 from tqdm import tqdm

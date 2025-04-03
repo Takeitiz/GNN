@@ -163,11 +163,32 @@ def load_road_network(network_name="synthetic", n_nodes=100):
         G = preprocess_network(G)
         edge_weights = {(u, v): G[u][v]['weight'] for u, v in G.edges()}
 
+    elif network_name == "city":
+        # Load custom city network
+        G = load_city_network()
+        G = preprocess_network(G)
+        edge_weights = {(u, v): G[u][v]['weight'] for u, v in G.edges()}
+
     else:
         raise ValueError(f"Unknown network name: {network_name}")
 
     print(f"Loaded {network_name} network with {G.number_of_nodes()} nodes and {G.number_of_edges()} edges")
     return G, edge_weights
+
+
+def load_city_network():
+    """
+    Load the city road network from the processed OSM data.
+
+    Returns:
+        G: NetworkX graph representation of the city network
+    """
+    # Check if processed data exists
+    if os.path.exists("city_road_network.gpickle"):
+        print("Loading city road network from processed file...")
+        return nx.read_gpickle("city_road_network.gpickle")
+    else:
+        raise FileNotFoundError("City road network not found. Run process_osm.py first.")
 
 
 if __name__ == "__main__":

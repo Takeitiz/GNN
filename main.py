@@ -47,7 +47,7 @@ def main():
     # Parse command line arguments
     parser = argparse.ArgumentParser(description="Edge-based GNN for Critical Road Ranking")
     parser.add_argument("--network", type=str, default="synthetic",
-                        choices=["synthetic", "us_freeway", "minnesota"],
+                        choices=["synthetic", "us_freeway", "minnesota", "city"],
                         help="Network to use")
     parser.add_argument("--demo", type=str, default="train",
                         choices=["train", "resilience", "recovery"],
@@ -66,6 +66,7 @@ def main():
                         help="Save the trained model")
     parser.add_argument("--load_model", action="store_true",
                         help="Load a trained model")
+
     args = parser.parse_args()
 
     # Set seeds for reproducibility
